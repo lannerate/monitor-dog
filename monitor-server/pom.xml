@@ -33,16 +33,16 @@
         <!-- For tests -->
         <junit.version>4.11</junit.version>
     </properties>
-   <distributionManagement>
-        <snapshotRepository>
-            <id>thirdparty</id>
-            <url>http://197.78.1.14:8081/nexus/content/repositories/thirdparty/</url>
-        </snapshotRepository>
-        <repository>
-            <id>hzbank_group</id>
-            <url>http://197.78.1.14:8081/nexus/content/repositories/hzbank_group/</url>
-        </repository>
-    </distributionManagement>
+   <!--<distributionManagement>-->
+        <!--<snapshotRepository>-->
+            <!--<id>thirdparty</id>-->
+            <!--<url>http://197.78.1.14:8081/nexus/content/repositories/thirdparty/</url>-->
+        <!--</snapshotRepository>-->
+        <!--<repository>-->
+            <!--<id>hzbank_group</id>-->
+            <!--<url>http://197.78.1.14:8081/nexus/content/repositories/hzbank_group/</url>-->
+        <!--</repository>-->
+    <!--</distributionManagement>-->
     <dependencies>
         <!-- spring begin -->
         <dependency>
@@ -259,11 +259,11 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.hzbank</groupId>
-            <artifactId>oracle</artifactId>
-            <version>12</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.hzbank</groupId>-->
+            <!--<artifactId>oracle</artifactId>-->
+            <!--<version>12</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.apache.velocity</groupId>

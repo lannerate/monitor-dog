@@ -97,19 +97,19 @@
 
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>log4mongo-java</id>
-            <name>anyframejava</name>
-            <url>http://197.78.1.14:8081/nexus/content/repositories/hzbank</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>log4mongo-java</id>-->
+            <!--<name>anyframejava</name>-->
+            <!--<url>http://197.78.1.14:8081/nexus/content/repositories/hzbank</url>-->
+            <!--<releases>-->
+                <!--<enabled>true</enabled>-->
+            <!--</releases>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
+    <!--</repositories>-->
     <build>
         <plugins>
             <plugin>

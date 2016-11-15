@@ -4,22 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.heagle</groupId>
-    <artifactId>heagle-monitor-parent</artifactId>
+    <artifactId>monitor-parent</artifactId>
     <version>1.1</version>
     <packaging>pom</packaging>
-    <name>heagle-monitor</name>
+    <name>monitor-dog</name>
 
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>thirdparty</id>
-            <url>http://197.78.1.14:8081/nexus/content/repositories/thirdparty/</url>
-        </snapshotRepository>
-        <repository>
-            <id>hzbank_group</id>
-            <url>http://197.78.1.14:8081/nexus/content/repositories/hzbank_group/</url>
-        </repository>
-    </distributionManagement>
+    <!--<distributionManagement>-->
+        <!--<snapshotRepository>-->
+            <!--<id>thirdparty</id>-->
+            <!--<url>http://197.78.1.14:8081/nexus/content/repositories/thirdparty/</url>-->
+        <!--</snapshotRepository>-->
+        <!--<repository>-->
+            <!--<id>hzbank_group</id>-->
+            <!--<url>http://197.78.1.14:8081/nexus/content/repositories/hzbank_group/</url>-->
+        <!--</repository>-->
+    <!--</distributionManagement>-->
 
     <properties>
         <project.base.dir>${project.basedir}</project.base.dir>
