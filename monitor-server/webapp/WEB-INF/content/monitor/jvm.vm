@@ -1,0 +1,165 @@
+
+<div class="container">
+    <nav class="nav clearfix">
+        <div class="logo"><a href="#"><img src="$link.setRelative('images/logo.png')" width="117" height="35" /></a></div>
+        <ul>
+            <li><a href="$link.setRelative('monitor/index')">综合报告</a><i></i></li>
+            <li><a href="$link.setRelative('monitor/trans')">交易跟踪</a><i></i></li>
+            <li class="current"><a href="$link.setRelative('monitor/jvm')">JVM</a><i class="jvm"></i></li>
+            <li><a href="$link.setRelative('monitor/log')">错误日志</a><i></i></li>
+       #*     <li><a href="#">TPS/VPS</a><i></i></li>*#
+        </ul>
+        <div>
+            #if($authz.isAuthenticated())
+                <a href="$link.setRelative("/j_spring_security_logout")" class="exit">退出</a>
+            #else
+                <a href="$link.setRelative("/j_spring_security_check")" class="exit">登录</a>
+            #end
+        </div>
+    
+    </nav><!--nav-->
+     
+    <div class="data-list">
+        <span class="prev"><i></i></span>
+        <div class="data-list-box">
+            <div class="data-list-ul">
+              #*<canvas class="process" width="122px" height="122px">80%</canvas>
+                <canvas class="process1" width="122px" height="122px">500M</canvas>
+                <canvas class="process1" width="122px" height="122px">500M</canvas>
+                <canvas class="process1" width="122px" height="122px">500M</canvas>
+                <canvas class="process" width="122px" height="122px">90%</canvas>
+                <canvas class="process" width="122px" height="122px">90%</canvas>
+                <canvas class="process" width="122px" height="122px">90%</canvas>
+                <canvas class="process" width="122px" height="122px">90%</canvas>
+                <canvas class="process" width="122px" height="122px">90%</canvas>*#
+            </div>
+        </div>
+        <span class="next"><i></i></span>
+        <div class="server-box">
+            <a href="#" onclick="ajaxRequestServer('node28')" class="server">28<br />服务器</a>
+            <a href="#" onclick="ajaxRequestServer('node29')"class="server1 on1" >29<br />服务器</a>
+        </div>
+    </div><!--data-list-->
+    
+   <h3>线程数 <em>个/秒</em></h3>
+    <div id="lineChart">
+	                	
+    </div>
+    <!-- lineChart -->
+    
+
+  
+     
+  
+  <footer class="footer">
+    Copyright © 2003-2014 Heagle,All Rights Reserved
+  
+  </footer>
+</div><!--container-->
+
+<script type="text/javascript" src="$link.setRelative('js/canvas.js')"></script>
+<script type="text/javascript" src="$link.setRelative('js/threadlinecharts.js')"></script>
+
+<script type="text/javascript">
+
+  function ajaxRequest(urls){
+      $(".data-list-ul").empty();
+      jQuery.ajax({
+	   type: "GET",
+	   url: urls,
+//	   data: {"asda":108998},
+	   dataType: 'json',
+	   success: function(data){
+//		   var json = eval('(' + data + ')');
+		   var json = data;
+           var process1 = '<canvas class="process1" width="122px" height="122px">80%</canvas>';
+           var process = '<canvas class="process" width="122px" height="122px">80%</canvas>';
+
+           for(i=0;i<json.percent.length;i++){
+               $(".data-list-ul").append(process1);
+            };
+           for(i=0;i<json.numerical.length;i++){
+               $(".data-list-ul").append(process);
+           }
+
+           var canvases = $('canvas.process1');
+		   for(i=0;i<json.percent.length;i++){
+			  drawNum(json.percent[i], canvases[i]);
+		   };
+		   var canvass = $('canvas.process');
+		   for(i=0;i<json.numerical.length;i++){
+			  numeRical(json.numerical[i], canvass[i]);
+		   }
+           sliders();
+	   }
+	});
+	};
+
+  //线程折线图 初始化start
+  function ajaxRequestThread(urls,title,label){
+      jQuery.ajax({
+          type: "GET",
+          url: urls,
+          dataType: 'json',
+          success: function(data){
+              var json = data;
+              initChart(json,title,label);
+              $("#lineChart").find(".highcharts-axis-labels").eq(0).hide();
+          }
+      });
+  };
+
+  /**
+   * 获取各节点的性能参数
+   * @param node
+   */
+  function ajaxRequestServer(node){
+       if(node=='node28'){
+           ajaxRequest('heagle_monitor/node28/jvm/metrics/');
+           ajaxRequestThread('heagle_monitor/node28/jvm/threads','线程','个');
+       }
+      if(node=='node29'){
+          ajaxRequest('heagle_monitor/node29/jvm/metrics/');
+          ajaxRequestThread('heagle_monitor/node29/jvm/threads','线程','个');
+      }
+  };
+
+  ajaxRequestServer('node28');
+
+  function sliders(){
+      var liw$ = $(".data-list-box canvas").width() + 30;
+      var lisum = $(".data-list-box canvas").length;
+      $(".data-list-ul").width(liw$*lisum);
+      $(".prev").click(function(){
+          var ulLeft = parseInt($(".data-list-ul").css("left"));
+          var bleft = ulLeft +liw$;
+          if(ulLeft == 0){
+              return;
+          }else{
+              $(".data-list-ul").animate({left:bleft},500);
+          }
+      });
+
+      $(".next").click(function(){
+          var ulLeft = parseInt($(".data-list-ul").css("left"));
+          var ulWidth = parseInt($(".data-list-ul").css("width"));
+          var bleft = ulLeft - liw$;
+          var lwidth = ulWidth - liw$*7;
+          console.log(bleft +','+lwidth+','+ulWidth);
+          if(ulLeft <= -lwidth){
+              return;
+          }else{
+              $(".data-list-ul").animate({left:bleft},500)
+          }
+
+      });
+  };
+
+  $(".server-box a").click(function(){
+      if($(this).hasClass("on1")){
+          $(this).removeClass("on1").addClass("on");
+          $(this).siblings().removeClass("on").addClass("on1");
+      };
+
+  });
+</script>

@@ -1,0 +1,10 @@
+@charset "utf-8";
+.login-container{ background:url(../images/loginbg.jpg) no-repeat top left; width:100%;}
+.login-main{ height:281px; width:272px;border-radius:3px; padding:41px; background:url(../images/mask.png) repeat; box-shadow:-1px 2.1px 3px 1px #394252; position:absolute;top:50%; left:50%; margin-top:-181px; margin-left:-177px; border:1px solid #5d636f; }
+.login-main h1{ background:url(../images/logo-big.png) no-repeat; height:48px; background-position:49px;}
+.login-main input{ height:40px; width:270px; font-size:16px; border:1px solid #727782; border-radius:3px; color:#fff; }
+.loginName{ margin-top:45px; background:url(../images/person.png) no-repeat; background-position:10px 12px; text-indent:48px;}
+.loginPassword{ margin-top:20px; background:url(../images/password.png) 10px 14px no-repeat; text-indent:48px;}
+.login-main #loginBtn{ margin-top:40px; background:#e7686b; border-style:none; cursor:pointer;}
+/* 输入错误时input的样式 */
+.login-main .error{border:1px solid #e7686b; color:#e7686b;}

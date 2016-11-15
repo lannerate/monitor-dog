@@ -1,0 +1,174 @@
+<div class="container">
+    <nav class="nav clearfix">
+        <div class="logo"><a href="#"><img src="$link.setRelative('images/logo.png')" width="117" height="35" /></a></div>
+        <ul>
+            <li><a href="$link.setRelative('monitor/index')">综合报告</a><i></i></li>
+            <li class="current"><a href="$link.setRelative('monitor/trans')">交易跟踪</a><i></i></li>
+            <li><a href="$link.setRelative('monitor/jvm')">JVM</a><i class="jvm"></i></li>
+            <li><a href="$link.setRelative('monitor/log')">错误日志</a><i></i></li>
+            #*<li><a href="#">TPS/VPS</a><i></i></li>*#
+        </ul>
+        <div>
+            #if($authz.isAuthenticated())
+                <a href="$link.setRelative("/j_spring_security_logout")" class="exit">退出</a>
+            #else
+               <a href="$link.setRelative("/j_spring_security_check")" class="exit">登录</a>
+            #end
+        </div>
+
+    </nav><!--nav-->
+
+    <div class="data-list data-list1">
+     <h3 class="paim">前八交易排名</h3>
+      <canvas class="process1" width="122px" height="122px">2,000</canvas>
+      <canvas class="process1" width="122px" height="122px">500</canvas>
+      <canvas class="process1" width="122px" height="122px">80</canvas>
+      <canvas class="process1" width="122px" height="122px">500</canvas>
+      <canvas class="process1" width="122px" height="122px">90</canvas>
+      <canvas class="process1" width="122px" height="122px">100</canvas>
+      <canvas class="process1" width="122px" height="122px">100</canvas>
+      <canvas class="process1" width="122px" height="122px">100</canvas>
+
+    </div><!--data-list-->
+
+    <h3>交易走势</h3>
+    <div id="lineChart">
+	                	
+    </div><!-- lineChart -->
+    
+   
+       
+    
+   <h6>今日前八交易耗时</h6>
+   
+  <table width="100%" border="0" class="mistakelog" id="durationTrans">
+      <tr>
+        <th width="10%">交易流水</th>
+        <th width="10%">交易类型</th>
+        <th width="80%">交易耗时</th>
+      </tr>
+      #*<tr>
+        <td>风险管理</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>风险管理</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>风险管理</td>
+        <td><span><progress max=100 value=21.5></progress><em>215</em></span></td>
+      </tr>
+      <tr>
+        <td>风险管理</td>
+        <td><span><progress max=100 value=21.5></progress><em>215</em></span></td>
+      </tr>
+      <tr>
+        <td>风险管理</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>风险管理</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>风险管理</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>风险管理</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>风险管理</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>风险管理</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>*#
+  </table>
+
+  <footer class="footer">
+    Copyright © 2003-2014 Heagle,All Rights Reserved
+  
+  </footer>
+</div><!--container-->
+
+
+
+
+
+<script type="text/javascript" src="$link.setRelative('/js/canvas.js')"></script>
+<script type="text/javascript" src="$link.setRelative('/js/linecharts.js')"></script>
+<script type="text/javascript">
+  function ajaxRequest(urls){
+       jQuery.ajax({
+	   type: "GET",
+	   url: urls,
+//	   data: {"asda":108998},
+	   dataType: 'json',
+	   success: function(data){
+//           alert(data);
+//		   var json = eval('(' + data + ')');
+		   var json = data;
+        /*   var process1 = '<canvas class="process1" width="122px" height="122px"></canvas>';
+           for(i=0;i<json.numerical.length;i++){
+               $(".data-list").append(process1);
+           };*/
+		   var canvass = $('canvas.process1');
+		   for(i=0;i<json.numerical.length;i++){
+			  numeRical(json.numerical[i], canvass[i]);
+		   }
+	   }
+	});
+	};
+
+  function ajaxDurationTopReq(urls){
+      jQuery.ajax({
+          type: "GET",
+          url: urls,
+          dataType: 'json',
+          success: function(data){
+              var json = data;
+//              for(i=0;i<json.length;i++){
+              // top 8
+              for(i=0;i<8;i++){
+
+##                  var $li = '<li><em> ' + json.percent[i].rank +  ' </em> ' + json.percent[i].label + ' <progress max=' + json.percent[i].maxs + ' value=' + json.percent[i].values + '></progress></li>';
+
+                  var $ti = '<tr>'
+                  +'<td>'+json[i].tranNo+'</td>'
+                  +'<td>'+json[i].processCode+'</td>'
+                  +'<td><span><progress max='+json[i].maxDuration+' value='+json[i].duration+'></progress><em>'+json[i].duration+' 秒</em></span></td>'
+               +'</tr>';
+
+                  $("#durationTrans").append($ti);
+              }
+          }
+      });
+  };
+
+
+ ajaxDurationTopReq("trans/top/duration/render");
+
+
+
+//折线图 初始化start
+          jQuery.ajax({
+              type: "GET",
+              url: "linecharts/render",
+              //		data: {"asda":108998},
+              dataType: 'json',
+              success: function(data){
+                  //		   var json = eval('(' + data + ')');
+                  var json = data;
+                  initChart(json);
+
+                  $("#lineChart").find(".highcharts-axis-labels").eq(0).hide();
+
+              }
+          });
+
+  ajaxRequest("trans/render");
+</script>

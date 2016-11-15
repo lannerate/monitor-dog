@@ -1,0 +1,211 @@
+<div class="container">
+    <nav class="nav clearfix">
+        <div class="logo"><a href="#"><img src="$link.setRelative('images/logo.png')" width="117" height="35" /></a></div>
+        <ul>
+            <li class="current"><a href="$link.setRelative('monitor/index')">综合报告</a><i></i></li>
+            <li><a href="$link.setRelative('monitor/trans')">交易跟踪</a><i></i></li>
+            <li><a href="$link.setRelative('monitor/jvm')">JVM</a><i class="jvm"></i></li>
+            <li><a href="$link.setRelative('monitor/log')">错误日志</a><i></i></li>
+            #*<li><a href="#">TPS/VPS</a><i></i></li>*#
+        </ul>
+
+
+        <div>
+            #if($authz.isAuthenticated())
+             <a href="$link.setRelative("/j_spring_security_logout")" class="exit">退出</a>
+            #else
+             <a href="$link.setRelative("/j_spring_security_check")" class="exit">登录</a>
+            #end
+        </div>
+    
+    </nav><!--nav-->
+
+    <div class="data-list">   
+      <canvas class="process1" width="122px" height="122px">2,000</canvas>  
+      <canvas class="process" width="122px" height="122px">80%</canvas>
+      <canvas class="process1" width="122px" height="122px">500M</canvas>
+      <canvas class="process" width="122px" height="122px">90%</canvas>
+      <canvas class="process1" width="122px" height="122px">100</canvas>
+    </div><!--data-list-->
+    
+    <h3>交易走势</h3>
+    <div id="lineChart">
+	                	
+    </div><!-- lineChart -->
+    
+    <div class="numpeople">
+        <h3>在线人数分布</h3>
+        <div class="map-box clearfix">
+            <div class="map"><img src="$link.setRelative('images/chinamap.jpg')" border="0" usemap="#Map" />
+              <map name="Map" id="Map">
+                <area shape="poly" title="湖北" coords="392,283,423,294,441,304,456,326,432,338,415,332,397,327,379,337,369,327,393,313,384,305,383,294,391,285" href="#" />
+                <area shape="poly"  title="北京" coords="444,199,437,180,448,178,452,185,445,198" href="#" />
+                <area shape="poly" title="重庆" coords="340,347,336,329,344,329,358,320,365,303,381,305,385,308,381,319,371,328,379,338,380,355,359,342,349,349,341,348" href="#" />
+                <area shape="poly" title="天津" coords="461,209,456,211,452,204,445,199,453,187,460,193,463,205" href="#" />
+                
+                <area shape="poly"  title="广东" coords="396,457,387,456,386,447,396,434,408,415,409,399,414,393,419,397,421,390,437,385,442,389,439,396,449,396,457,394,465,393,472,400,477,408,454,421,438,419,430,430,413,440,404,442,396,444,391,450,397,455,437,420,454,421,439,421" href="#" />
+                <area shape="poly" title="福建" coords="477,408,465,393,458,392,463,373,468,361,474,352,487,345,496,349,513,350,502,367,504,375,480,409" href="#" />
+                <area shape="poly" title="浙江" coords="490,345,482,337,481,328,492,316,494,307,506,306,516,310,519,317,523,322,521,337,514,349,496,349,493,345" href="#" />
+                <area shape="poly" title="河北" coords="456,210,446,198,438,181,443,176,454,186,464,200,473,199,481,189,470,172,461,165,456,160,450,155,446,163,435,170,428,169,423,166,420,178,420,187,424,196,423,203,417,209,420,219,420,237,427,243,439,243,454,220,460,217,460,210,467,199" href="#" />
+                <area shape="poly" title="山东" coords="440,241,461,214,471,213,482,223,492,216,509,216,515,222,511,226,498,234,490,248,480,254,473,259,458,259,447,262,440,254,452,250,442,242" href="#" />
+                <area shape="poly" title="上海" coords="514,309,522,302,522,292,515,285,511,295,513,307" href="#" />
+                <area shape="poly" title="江苏" coords="494,306,505,305,514,307,512,293,516,286,506,275,501,259,488,255,483,252,475,259,458,260,462,263,476,267,472,271,479,275,485,276,487,286,481,288,493,305" href="#" />
+                <area shape="poly" title="陕西" coords="391,282,384,267,389,254,384,246,383,229,386,213,386,205,375,213,367,223,359,228,355,227,346,236,363,249,348,263,341,272,336,282,334,295,363,303,382,304,381,291,392,286" href="#" />
+                <area shape="poly" title="山西" coords="385,202,384,246,389,253,383,269,406,259,421,242,419,214,417,212,423,203,420,187,417,185,400,191,395,202,384,205" href="#" />
+                <area shape="poly" title="河南" coords="443,303,450,301,451,293,442,287,445,276,446,267,453,274,456,269,451,261,441,252,448,249,442,243,426,242,419,238,404,257,386,268,391,281,423,293,443,303" href="#" />
+                <area shape="poly" title="安徽" coords="482,326,493,316,494,306,481,288,488,285,484,279,473,272,475,266,462,263,460,260,453,262,455,265,453,273,446,266,444,286,451,294,444,302,456,317,463,329,481,325" href="#" />
+                <area shape="poly" title="江西" coords="435,387,440,389,441,394,454,396,460,387,466,366,479,351,488,345,482,340,481,328,464,328,454,326,431,335,436,345,427,356,439,375,436,385" href="#" />
+                <area shape="poly" title="四川" coords="315,354,323,362,329,356,332,366,343,361,337,349,334,343,337,329,350,325,360,317,360,303,344,297,335,296,331,300,325,293,319,287,309,282,296,277,295,287,280,296,254,288,242,293,250,311,256,348,262,360,268,351,271,360,280,367,295,386,304,380,303,356,309,359,312,355" href="#" />
+                <area shape="poly" title="湖南" coords="403,378,407,396,415,394,420,400,422,391,433,388,439,378,434,370,428,357,436,348,433,338,400,327,381,335,378,351,377,365,383,365,377,387,401,380" href="#" />
+                <area shape="poly" title="广西" coords="337,425,346,427,349,440,363,445,373,441,382,446,384,444,408,415,407,395,403,381,380,385,366,391,363,399,355,397,338,401,341,413,338,425" href="#" />
+                <area shape="poly" title="贵州" coords="337,402,354,396,363,399,367,389,376,387,382,366,377,366,377,357,361,341,351,348,342,348,342,360,334,365,327,367,313,370,314,377,324,380,325,385,319,391,322,404,335,400" href="#" />
+                <area shape="poly" title="云南" coords="288,452,288,437,305,434,319,430,330,424,336,427,341,415,336,402,323,405,321,391,328,385,321,381,316,377,314,369,325,369,332,368,326,358,324,364,316,355,308,359,306,353,306,378,296,385,269,361,268,352,262,361,257,349,254,346,243,363,248,382,242,394,234,400,238,411,250,410,250,418,254,425,264,424,258,438,265,435,268,443,271,449,283,446" href="#" />
+                <area shape="poly" title="辽宁" coords="480,188,451,159,467,163,474,154,491,148,504,135,511,133,528,135,536,143,538,155,538,168,538,175,532,180,528,186,512,191,503,203,496,203,502,182,496,173,486,189" href="#" />
+                <area shape="poly" title="吉林" coords="538,173,551,156,559,159,565,155,562,149,566,145,570,135,580,141,585,129,584,121,560,121,550,114,546,120,538,113,538,107,517,110,506,97,489,106,492,118,509,130,523,134,529,137,538,141,538,153,539,162,538,172" href="#" />
+                <area shape="poly" title="黑龙江" coords="500,99,490,88,492,77,508,67,505,56,507,47,511,40,504,33,494,32,486,33,478,23,469,21,463,11,475,5,485,5,498,5,509,15,522,31,533,43,545,49,555,53,561,55,565,65,572,68,583,64,590,57,598,57,597,100,580,103,585,115,582,120,561,120,550,113,549,120,537,113,536,103,529,108,518,109,500,99" href="#" />
+                <area shape="poly" title="海南" coords="395,483,401,476,403,463,397,458,390,464,387,464,382,466,376,474,379,480,395,484" href="#" />
+                <area shape="poly" title="甘肃" coords="208,209,238,214,259,210,270,218,292,232,300,250,293,262,294,277,281,276,294,281,301,276,318,284,331,298,340,277,364,250,346,236,343,256,330,255,328,242,322,228,309,224,316,216,317,207,296,218,287,212,278,204,279,196,277,188,260,191,255,175,248,163,228,172,203,185,212,207" href="#" />
+                <area shape="poly" title="宁夏" coords="322,227,336,223,343,206,348,218,355,226,348,235,345,255,328,256,329,240,322,228" href="#" />
+                <area shape="poly" title="台湾" coords="521,424,518,415,514,405,519,398,519,389,526,379,531,376,531,391,529,409,524,422" href="#" />
+                <area shape="poly" title="青海" coords="242,293,254,285,279,294,295,285,291,280,282,275,295,272,295,263,299,253,290,228,263,210,233,215,211,210,179,216,171,222,173,234,161,248,157,264,153,274,166,288,190,294,204,296,220,306,232,306,241,294" href="#" />
+                <area shape="poly" title="西藏" coords="138,364,146,355,157,356,167,354,171,364,185,357,191,354,203,350,218,343,226,358,237,357,243,362,257,347,245,296,240,294,234,307,220,305,204,295,183,294,164,287,155,275,160,246,135,244,99,252,77,250,67,257,50,256,47,263,37,266,38,279,28,284,28,296,21,306,41,307,41,312,49,319,62,317,68,325,74,329,83,334,83,342,92,345,97,345,101,351,108,353,126,355,137,361" href="#" />
+                <area shape="poly" title="新疆" coords="38,266,26,243,17,237,11,221,4,218,10,210,11,201,3,196,8,179,31,176,45,174,52,171,80,162,82,154,85,147,89,138,84,124,92,121,102,123,109,122,121,100,129,99,143,100,151,89,163,81,170,76,186,86,195,94,203,104,200,114,198,126,212,133,223,140,233,143,239,152,247,164,205,186,211,210,180,215,173,222,173,233,161,247,130,244,90,251,74,250,63,257,49,256,43,264" href="#" />
+                <area shape="poly" title="内蒙古" coords="249,164,287,162,316,174,345,162,377,161,394,147,395,139,394,132,405,129,409,133,413,126,431,121,438,106,452,96,461,94,455,82,443,90,432,85,430,66,435,58,445,61,455,52,453,46,461,25,457,20,465,10,468,17,476,23,483,31,499,33,509,41,506,55,506,65,494,75,489,87,498,99,489,106,496,119,506,129,509,132,488,149,475,152,467,161,447,154,441,166,426,169,421,165,419,185,404,188,399,195,386,204,379,211,366,221,354,226,342,207,332,224,309,225,319,206,299,215,278,204,279,191,271,186,258,191,248,167" href="#" />
+              </map>
+            <!--<p data-rank="5" class="">重庆</p>
+             <p data-rank="7" class="">湖北</p>
+             <p data-rank="8" class="hn">湖南</p>
+             <p data-rank="2" class="bj">北京</p>
+             <p data-rank="9" class="tj">天津</p>
+             <p data-rank="6"  class="sh">上海</p>
+             <p data-rank="5" class="zj">浙江</p>
+             <p data-rank="4" class="fj">福建</p>
+             <p data-rank="13" class="js">江苏</p>
+             <p data-rank="10" class="ah">安徽</p>
+             <p data-rank="12" class="hen">河南</p>
+             <p data-rank="15" class="heb">河北</p>
+             <p data-rank="14" class="nl">辽宁</p>
+             <p data-rank="16" class="jl">吉林</p>
+             <p data-rank="17" class="hlj">黑龙江</p>
+             <p data-rank="18" class="sx">山西</p>
+             <p data-rank="19" class="sxi">陕西</p>
+             <p data-rank="20" class="nx">宁夏</p>
+             <p data-rank="21" class="gs">甘肃</p>
+             <p data-rank="22" class="qh">青海</p>
+             <p data-rank="23" class="xj">新疆</p>
+             <p data-rank="24" class="nmg">内蒙古</p>
+             <p data-rank="25" class="sd">山东</p>
+             <p data-rank="26" class="xz">西藏</p>
+             <p data-rank="27" class="gz">贵州</p>
+             <p data-rank="28" class="yn">云南</p>
+             <p data-rank="29" class="sc">四川</p>
+             <p data-rank="30" class="gx">广西</p>
+             <p data-rank="31" class="gd">广东</p>
+             <p data-rank="1" class="jx">江西</p>  -->
+             
+       </div> <!--map--> 
+       
+       <div class="frontTop">
+          <h4>城市分布排名</h4>
+          <ul>
+             <!-- <li><em>1</em>北京<progress class="progress" max=100 value=90></progress></li>
+              <li><em>2</em>上海<progress class="progress" max=100 value=90></progress></li>
+              <li><em>3</em>广州<progress class="progress" max=100 value=90></progress></li>
+              <li><em>4</em>深圳<progress max=100 value=80></progress></li>
+              <li><em>5</em>天津<progress max=100 value=80></progress></li>
+              <li><em>6</em>杭州<progress max=100 value=80></progress></li>
+              <li><em>7</em>郑州<progress max=100 value=80></progress></li>
+              <li><em>8</em>成都<progress max=100 value=80></progress></li>
+              <li><em>9</em>苏州<progress max=100 value=80></progress></li>
+              <li><em>10</em>南京<progress max=100 value=80></progress></li>-->
+          </ul>
+       </div><!--frontTop--> 
+   </div> <!--map-box--> 
+
+  </div><!--numpeople-->
+  
+     
+ #*  <h6>错误日志</h6>
+   
+  <table width="100%" border="0" class="mistakelog">
+    <thead>
+      <tr>
+        <th width="15%">错误编码</th>
+        <th width="85%">数量</th>
+      </tr>
+    </thead>
+    <tbody>
+     <tr>
+        <td>Nethevrlands</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>Italy</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>Nethevrlands</td>
+        <td><span><progress max=100 value=21.5></progress><em>215</em></span></td>
+      </tr>
+      <tr>
+        <td>Italy</td>
+        <td><span><progress max=100 value=41.5></progress><em>415</em></span></td>
+      </tr>
+      <tr>
+        <td>Nethevrlands</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>Italy</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>Nethevrlands</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>Italy</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>Nethevrlands</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+      <tr>
+        <td>Italy</td>
+        <td><span><progress max=100 value=20.3></progress><em>203</em></span></td>
+      </tr>
+    </tbody>
+  </table>*#
+
+  <footer class="footer">
+    Copyright © 2003-2014 Heagle,All Rights Reserved
+  </footer>
+</div><!--container-->
+
+
+
+
+
+<div class="openBox hide"><i class="icon"></i><i class="icons"></i><p></p></div>
+<script type="text/javascript" src="$link.setRelative('js/canvas.js')"></script>
+<script type="text/javascript" src="$link.setRelative('js/linecharts.js')"></script>
+<script type="text/javascript" src="$link.setRelative('js/chinamap.js')"></script>
+<script type="text/javascript">
+//折线图 初始化start
+    jQuery.ajax({
+    type: "GET",
+    url: "linecharts/render",
+    //		data: {"asda":108998},
+    dataType: 'json',
+    success: function(data){
+    //		   var json = eval('(' + data + ')');
+    var json = data;
+    initChart(json);
+
+    $("#lineChart").find(".highcharts-axis-labels").eq(0).hide();
+
+    }
+    });
+
+</script>

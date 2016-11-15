@@ -1,0 +1,112 @@
+#set($mainMenu='tasks')
+#parse("/WEB-INF/content/project/_header.vm")
+<script src="$link.setRelative('/jsEditor/codemirror.js')" type="text/javascript"></script>
+<script src="$link.setRelative('/jsEditor/model/javascript.js')" type="text/javascript"></script>
+<link rel="stylesheet" href="$link.setRelative('/jsEditor/codemirror.css')">
+<link rel="stylesheet" href="$link.setRelative('/jsEditor/model/javascript.css')">
+<script type="text/javascript">
+    $(document).ready(function() {
+	
+	var  script_text = CodeMirror.fromTextArea(document.getElementById("script_text"), {
+	lineNumbers: true,
+	matchBrackets: true,
+	theme:"blackboard"
+  });
+  
+  	var console = CodeMirror.fromTextArea(document.getElementById("console"), {
+	lineNumbers: true
+  });
+	
+        $("#add_form").validate();
+        $("#run_btn").click(function() {
+            var params = jQuery.param({script:script_text.getValue()});
+
+            jQuery.ajax({
+                url:"$link.setRelative( "/projects/${project.name}/mongo/console?format=json")",
+                data: params,
+                type:'post',
+                success : function(msg) {
+				if(console){
+                    console.setValue(console.getValue()+ JSON.stringify(msg) +"\n");}
+                }
+            });
+        });
+		
+		$("#clear_btn").click(function() {
+            console.setValue(""); 
+        });
+
+        $("#err_log_btn").click(function() {
+            $("#task_name").val('log_stats');
+            $("#cron_text").val('40 */5 * * * *');
+            script_text.setValue(
+                    "//统计错误日志占比\n"+
+                            "err=db.${project.logCollection}.find({'level':'ERROR',timestamp:{\$gt:new Date(new Date - 300000)}}).count()\n" +
+                            "total=db.${project.logCollection}.find({timestamp:{\$gt:new Date(new Date - 300000)}}).count();\n"+
+                            "if(total==0)total=1;\n" +
+                            "value=err*100/total;\n" +
+                            "db.${project.metricCollection}.save({name:'错误日志百分比',value:value,timeStamp:new Date().getTime()});\n" +
+                            "return value;");
+        });
+        $("#key_word_btn").click(function() {
+            $("#task_name").val('key_word_stats');
+            $("#cron_text").val('20 */5 * * * *');
+            script_text.setValue(
+
+                    "//统计日志里某些关键字频率，并提取到告警邮件里\n"+
+                            ' var   metric_name="异常数据次数";       \n var cur = db.${project.logCollection}.find({message:/系统错误/,timestamp:{$gt:new Date(new Date - 60*60*1000)}}); \n  var content = "";  \n  var count=0; \n  cur.forEach( function(log) { \n      count++; \n      content =content+"\\n "+log.timestamp.toLocaleDateString()+" "+ log.timestamp.toLocaleTimeString() +" " +log["message"]; \n  }); \n     \n db.${project.metricCollection}.save({name:metric_name,value:count, content:content,timeStamp:new Date().getTime()}); \n return    "次数:"+ count +" \\n内容"+content;');
+        });
+
+        $("#money_stats_btn").click(function() {
+            $("#task_name").val('money_stats');
+            $("#cron_text").val('40 */5 * * * *');
+            script_text.setValue(
+
+                    "//统计日志里某些数字总值，如每5分钟收入等\n"+
+                            'm=function () { \n     result = this.message.match(".*money=(\\\\d+)"); \n     if (result) { \n         pricePaied = new NumberLong(result[1]);         \n         emit("pricePaied", pricePaied); \n     } \n  \n }  \n  \n r= function (key, values) { \n     var total = 0; \n     for (var i = 0; i < values.length; i++) { \n         total += values[i]; \n     } \n     return total; \n }   \n res=db.${project.logCollection}.mapReduce(m, r, {out:"${project.logCollection}_output", query:{timestamp:{$gt:new Date(new Date - 300000)}}}); \n pricePaied=db.${project.logCollection}_output.findOne({_id:"pricePaied"});\n if(pricePaied) \n    v=pricePaied.value; \n   else \n     v=0;    \n db.${project.metricCollection}.save({name:"5分钟收入",value:v,timeStamp:new Date().getTime()}); \n return res; ');
+        });
+
+        $("#system_btn").click(function() {
+            $("#task_name").val('system_stats');
+            $("#cron_text").val('40 */1 * * * *');
+            script_text.setValue(
+          'var now = new Date;\n var o=db.${project.logCollection}.findOne({"className":"com.hzbank.heagle.pubc.util.JvmMonitor",timestamp:{$gt:new Date(now - 1*60*1000)}});\n if(o){\n	result = o.message.match(".*memoryUsed=(\\\\d+).*cpuUsed=(\\\\d+).*threadCount=(\\\\d+).*diskUsedRate=(\\\\d+).*heapMemoryUsed=(\\\\d+).*noheapMemoryUsed=(\\\\d+).*Code Cache=(\\\\d+).*Eden Space=(\\\\d+).*Survivor Space=(\\\\d+).*Perm Gen=(\\\\d+).*totalNetworkRx=(\\\\d+).*totalNetworkTx=(\\\\d+)");\n  var memoryUsed = result[1]/1024;\n  var cpuUsed = result[2];\n var threadCount = result[3];\n  var diskUsedRate = result[4];\n  var heapMemoryUsed = result[5]/1024;\n  var noheapMemoryUsed = result[6]/1024;\n  var CodeCache = result[7]/1024;\n  var EdenSpace = result[8]/1024;\n  var SurvivorSpace = result[9]/1024;\n  var PermGen = result[10]/1024;\n  var totalNetworkRx = result[11]/(1024*1024);\n  var totalNetworkTx = result[12]/(1024*1024);\n  db.${project.metricCollection}.save({name:"memoryUsed (M)",value:memoryUsed,timeStamp:now.getTime()});  \n  db.${project.metricCollection}.save({name:"cpuUsed",value:cpuUsed,timeStamp:now.getTime()});  \n   db.${project.metricCollection}.save({name:"threadCount",value:threadCount,timeStamp:now.getTime()});  \n db.${project.metricCollection}.save({name:"diskUsedRate (百分比)",value:diskUsedRate,timeStamp:now.getTime()});  \n db.${project.metricCollection}.save({name:"heapMemoryUsed (M)",value:heapMemoryUsed,timeStamp:now.getTime()});  \n db.${project.metricCollection}.save({name:"noheapMemoryUsed (M)",value:noheapMemoryUsed,timeStamp:now.getTime()});  \n db.${project.metricCollection}.save({name:"CodeCache (M)",value:CodeCache,timeStamp:now.getTime()});  \n  db.${project.metricCollection}.save({name:"EdenSpace (M)",value:EdenSpace,timeStamp:now.getTime()});  \n db.${project.metricCollection}.save({name:"SurvivorSpace (M)",value:SurvivorSpace,timeStamp:now.getTime()}); \n db.${project.metricCollection}.save({name:"PermGen (M)",value:PermGen,timeStamp:now.getTime()});  \n db.${project.metricCollection}.save({name:"totalNetworkRx (M)",value:totalNetworkRx,timeStamp:now.getTime()});  \n db.${project.metricCollection}.save({name:"totalNetworkTx (M)",value:totalNetworkTx,timeStamp:now.getTime()});  \n return "cpuUsed="+ cpuUsed  +" memoryUsed="+memoryUsed  +" threadCount="+threadCount+" diskUsedRate="+diskUsedRate+" heapMemoryUsed="+heapMemoryUsed+" noheapMemoryUsed="+noheapMemoryUsed+" CodeCache="+CodeCache+" EdenSpace="+EdenSpace +" SurvivorSpace="+SurvivorSpace+" PermGen="+PermGen+" totalNetworkRx="+totalNetworkRx+" totalNetworkTx="+totalNetworkTx ; \n} \n return "无结果"; ');
+        ##'var now = new Date; \n m=function () { \n     result = this.message.match(".*memoryUsed=(\\\\d+).*cpuUsed=(\\\\d+).*threadCount=(\\\\d+).*diskUsedRate=(\\\\d+).*heapMemoryUsed=(\\\\d+).*noheapMemoryUsed=(\\\\d+).*Code Cache=(\\\\d+).*Eden Space=(\\\\d+).*Survivor Space=(\\\\d+).*Tenured Gen=(\\\\d+).*Perm Gen=(\\\\d+)"); \n     if (result) { \n     emit("memoryUsed", parseInt(result[1]/1024)); \n     emit("cpuUsed", parseFloat(result[2])); \n     emit("threadCount", parseInt(result[3])); \n     emit("diskUsedRate", parseFloat(result[4])); \n     emit("heapMemoryUsed", parseFloat(result[5]/1024)); \n     emit("noheapMemoryUsed", parseFloat(result[6]/1024)); \n     emit("CodeCache", parseFloat(result[7]/1024)); \n     emit("EdenSpace", parseFloat(result[8]/1024)); \n     emit("SurvivorSpace", parseFloat(result[9]/1024)); \n     emit("TenuredGen", parseFloat(result[10]/1024)); \n     emit("PermGen", parseFloat(result[11]/1024)); \n      } \n  \n }  \n  \n r= function (key, values) { \n     var total = 0; \n     for (var i = 0; i < values.length; i++) { \n         total += values[i]; \n     } \n     return total/values.length; \n }   \n res=db.${project.logCollection}.mapReduce(m, r, {out:"${project.logCollection}_output", query:{timestamp:{$gt:new Date(new Date - 0.5*60*1000)}}}); \n  if(res.counts.emit > 0){ \n  memoryUsed=db.${project.logCollection}_output.findOne({_id:"memoryUsed"}).value; \n   cpuUsed=db.${project.logCollection}_output.findOne({_id:"cpuUsed"}).value; \n   threadCount=db.${project.logCollection}_output.findOne({_id:"threadCount"}).value; \n  diskUsedRate=db.${project.logCollection}_output.findOne({_id:"diskUsedRate"}).value; \n  heapMemoryUsed=db.${project.logCollection}_output.findOne({_id:"heapMemoryUsed"}).value; \n   noheapMemoryUsed=db.${project.logCollection}_output.findOne({_id:"noheapMemoryUsed"}).value; \n    CodeCache=db.${project.logCollection}_output.findOne({_id:"CodeCache"}).value; \n    EdenSpace=db.${project.logCollection}_output.findOne({_id:"EdenSpace"}).value; \n SurvivorSpace=db.${project.logCollection}_output.findOne({_id:"SurvivorSpace"}).value;  \n  TenuredGen=db.${project.logCollection}_output.findOne({_id:"TenuredGen"}).value;\n   PermGen=db.${project.logCollection}_output.findOne({_id:"PermGen"}).value;\n \n  db.${project.metricCollection}.save({name:"memoryUsed (M)",value:memoryUsed,timeStamp:new Date().getTime()}); \n  db.${project.metricCollection}.save({name:"cpuUsed",value:cpuUsed,timeStamp:new Date().getTime()}); \n   db.${project.metricCollection}.save({name:"threadCount",value:threadCount,timeStamp:new Date().getTime()}); \n   db.${project.metricCollection}.save({name:"diskUsedRate (百分比)",value:diskUsedRate,timeStamp:now.getTime()}); \n   db.${project.metricCollection}.save({name:"heapMemoryUsed (M)",value:heapMemoryUsed,timeStamp:now.getTime()}); \n   db.${project.metricCollection}.save({name:"noheapMemoryUsed (M)",value:noheapMemoryUsed,timeStamp:now.getTime()}); \n   db.${project.metricCollection}.save({name:"CodeCache (M)",value:CodeCache,timeStamp:now.getTime()}); \n  db.${project.metricCollection}.save({name:"EdenSpace (M)",value:EdenSpace,timeStamp:now.getTime()}); \n  db.${project.metricCollection}.save({name:"SurvivorSpace (M)",value:SurvivorSpace,timeStamp:now.getTime()}); \n   db.${project.metricCollection}.save({name:"TenuredGen (M)",value:TenuredGen,timeStamp:now.getTime()}); \n   db.${project.metricCollection}.save({name:"PermGen (M)",value:PermGen,timeStamp:now.getTime()}); \n  } \n   return "cpuUsed="+ cpuUsed  +" memoryUsed="+memoryUsed  +" threadCount="+threadCount+" diskUsedRate="+diskUsedRate+" heapMemoryUsed="+heapMemoryUsed+" noheapMemoryUsed="+noheapMemoryUsed+" CodeCache="+CodeCache+" EdenSpace="+EdenSpace +" SurvivorSpace="+SurvivorSpace+" TenuredGen="+TenuredGen+" PermGen="+PermGen ; ');
+        });
+    });
+</script>
+<div id="content">
+    <div>
+        <h2>任务$task.name</h2>
+         ##script_text.setValue(" //统计系统整体性能指标\n"+
+    </div>
+
+    <form id="add_form" action="$link.setRelative("/projects/$project.name/tasks")" method="post">
+        名      称:<input name="name" id="task_name"  class="{required:true,name:true,minlength:2}" value="$!task.name"/> <br/>
+        频率(秒):<input name="cron" id="cron_text" class="{required:true,cron:true,minlength:6}" value="$!task.cron"/>秒 分 时 天 月 年<br/>
+        超时(秒):<input name="timeout" value="$!task.timeout"/><br/>
+        脚本 模板:<input type="button" id="err_log_btn" value="日志监控"/>
+        <input type="button" id="money_stats_btn" value="指标监控"/>
+        <input type="button" id="key_word_btn" value="关键字监控"/>
+        <input type="button" id="system_btn" value="性能监控"/>
+        <br/>
+		<div style="border-top: 1px solid black; border-bottom: 1px solid black;">
+		<textarea id="script_text"   name="script"  >$!{task.script}</textarea>
+		</div>
+        <br/>
+		<div style="float:left;">
+			<input type="submit" value="确定"/>
+			<input type="button" id="run_btn" value="测试"/>
+			<input type="button" id="clear_btn" value="清空"/>
+        </div>
+        <br/>
+		<br/>
+		<br/>
+    </form>
+    
+
+	<div style="border-top: 1px solid black; border-bottom: 1px solid black;">
+		<textarea id="console" ></textarea>
+	</div>
+	
+</div>

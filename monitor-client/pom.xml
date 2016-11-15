@@ -1,0 +1,136 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.heagle</groupId>
+        <artifactId>monitor-parent</artifactId>
+        <version>1.1</version>
+        <relativePath>../</relativePath>
+    </parent>
+
+    <artifactId>monitor-client</artifactId>
+    <properties>
+        <project.base.dir>${project.basedir}</project.base.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+   <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.12.3</version>
+    </dependency>
+    <dependency>
+            <groupId>org.log4mongo</groupId>
+            <artifactId>log4mongo-java</artifactId>
+           <!-- <scope>system</scope>
+            <systemPath>${basedir}/lib/log4mongo-java-0.7.2.jar</systemPath>-->
+            <version>0.7.2</version>
+     </dependency>
+    <dependency>
+        <groupId>org.jibble</groupId>
+        <artifactId>logtailer</artifactId>
+        <version>1.0</version>
+      </dependency>
+
+
+        <dependency>
+            <groupId>org.fusesource</groupId>
+            <artifactId>sigar</artifactId>
+            <version>1.6.4</version>
+            <type>jar</type>
+        </dependency>
+
+<!--
+        <dependency>
+            <groupId>org.fusesource</groupId>
+            <artifactId>sigar-x86-winnt</artifactId>
+            <version>1.6.4</version>
+            <type>dll</type>
+        </dependency>
+-->
+
+       <!-- <dependency>
+            <groupId>org.fusesource</groupId>
+            <artifactId>libsigar-x86-linux</artifactId>
+            <version>1.6.4</version>
+            <type>so</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fusesource</groupId>
+            <artifactId>libsigar-ia64-linux</artifactId>
+            <version>1.6.4</version>
+            <type>so</type>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.fusesource</groupId>
+            <artifactId>libsigar-amd64-linux</artifactId>
+            <version>1.6.4</version>
+            <type>so</type>
+        </dependency>
+
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>log4mongo-java</id>
+            <name>anyframejava</name>
+            <url>http://197.78.1.14:8081/nexus/content/repositories/hzbank</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/assembly.xml</descriptor>
+                    </descriptors>
+
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <!-- <bean id="logTask" class="com.heagle.monitor.model.Task" scope="prototype">
+        <property name="cron" value="40 */5 * * * *"/>
+        <property name="name" value="log_stats"/>
+        <property name="script" ><value>
+            <![CDATA[
+  //统计错误日志占比
+  err=db.$project.logCollection.find({'level':'ERROR',timestamp:{$gt:new Date(new Date - 300000)}}).count()
+  total=db.$project.logCollection.find({timestamp:{$gt:new Date(new Date - 300000)}}).count();
+  if(total==0)total=1;
+  value=err*100/total;
+  db.$project.metricCollection.save({name:'错误日志百分比',value:value,timeStamp:new Date().getTime()});
+  return value;
+                    ]]>  </value>
+
+        </property>
+    </bean>
+    -->
+
+    <bean id="jvmTask" class="com.heagle.monitor.model.Task" scope="prototype">
+        <property name="cron" value="1 */1 * * * *"/>
+        <property name="name" value="system_stats"/>
+        <property name="script" ><value>
+            <![CDATA[
+ //统计JVM性能指标
+ var now = new Date;
+ var ips = ['199.78.1.28','199.78.1.29'];
+ for (var i = 0; i < ips.length; i++) {
+      var ip = ips[i];
+      var o=db.$project.logCollection.findOne({"className":"com.hzbank.heagle.pubc.util.JvmMonitor","ip":ip,timestamp:{$gt:new Date(now - 1*60*1000)}});
+
+      if(o){
+
+       result = o.message.match(".*memoryUsed=(\\d+).*cpuUsed=(\\d+\\.\\d+).*threadCount=(\\d+).*diskUsedRate=(\\d+\\.\\d+).*heapMemoryUsed=(\\d+).*noheapMemoryUsed=(\\d+).*Code Cache=(\\d+).*Eden Space=(\\d+).*Survivor Space=(\\d+).*Perm Gen=(\\d+).*totalNetworkRx=(\\d+).*totalNetworkTx=(\\d+)");
+       var memoryUsed = result[1]/1024;
+       var cpuUsed = result[2];
+       var threadCount = result[3];
+       var diskUsedRate = result[4];
+       var heapMemoryUsed = result[5]/1024;
+       var noheapMemoryUsed = result[6]/1024;
+       var CodeCache = result[7]/1024;
+       var EdenSpace = result[8]/1024;
+       var SurvivorSpace = result[9]/1024;
+       var PermGen = result[10]/1024;
+       var totalNetworkRx = result[11]/(1024*1024);
+       var totalNetworkTx = result[12]/(1024*1024);
+
+       db.$project.metricCollection.save({ip:ip,name:"memoryUsed (M)",value:memoryUsed,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"cpuUsed",value:cpuUsed,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"threadCount",value:threadCount,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"diskUsedRate (百分比)",value:diskUsedRate,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"heapMemoryUsed (M)",value:heapMemoryUsed,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"noheapMemoryUsed (M)",value:noheapMemoryUsed,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"CodeCache (M)",value:CodeCache,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"EdenSpace (M)",value:EdenSpace,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"SurvivorSpace (M)",value:SurvivorSpace,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"PermGen (M)",value:PermGen,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"totalNetworkRx (M)",value:totalNetworkRx,timeStamp:now.getTime()});
+       db.$project.metricCollection.save({ip:ip,name:"totalNetworkTx (M)",value:totalNetworkTx,timeStamp:now.getTime()});
+       // return "cpuUsed="+ cpuUsed  +" memoryUsed="+memoryUsed  +" threadCount="+threadCount+" diskUsedRate="+diskUsedRate+" heapMemoryUsed="+heapMemoryUsed+" noheapMemoryUsed="+noheapMemoryUsed+" CodeCache="+CodeCache+" EdenSpace="+EdenSpace +" SurvivorSpace="+SurvivorSpace+" PermGen="+PermGen+" totalNetworkRx="+totalNetworkRx +" totalNetworkTx="+totalNetworkTx;
+      }
+       // return "无记录";
+  }
+   return "完成JVM性能指标统计";
+
+ ]]>  </value>
+
+        </property>
+    </bean>
+
+  <!--  <bean id="jvmTask" class="com.heagle.monitor.model.Task" scope="prototype">
+        <property name="cron" value="40 */1 * * * *"/>
+        <property name="name" value="system_stats"/>
+        <property name="script" ><value>
+            <![CDATA[
+ //统计系统整体性能指标
+ var now = new Date;
+ m=function () {
+      result = this.message.match(".*memoryUsed=(\\d+).*cpuUsed=(\\d+).*threadCount=(\\d+).*diskUsedRate=(\\d+).*heapMemoryUsed=(\\d+).*noheapMemoryUsed=(\\d+).*Code Cache=(\\d+).*Eden Space=(\\d+).*Survivor Space=(\\d+).*Tenured Gen=(\\d+).*Perm Gen=(\\d+)");
+      if (result) {
+
+          emit("memoryUsed", parseInt(result[1]/1024));
+          emit("cpuUsed", parseFloat(result[2]));
+          emit("threadCount", parseInt(result[3]));
+          emit("diskUsedRate", parseFloat(result[4]));
+          emit("heapMemoryUsed", parseFloat(result[5]/1024));
+          emit("noheapMemoryUsed", parseFloat(result[6]/1024));
+          emit("CodeCache", parseFloat(result[7]/1024));
+          emit("EdenSpace", parseFloat(result[8]/1024));
+          emit("SurvivorSpace", parseFloat(result[9]/1024));
+          emit("TenuredGen", parseFloat(result[10]/1024));
+          emit("PermGen", parseFloat(result[11]/1024));
+          }
+
+  }
+
+  r= function (key, values) {
+      var total = 0;
+      for (var i = 0; i < values.length; i++) {
+          total += values[i];
+      }
+      return total/values.length;
+  }
+ res=db.$project.logCollection.mapReduce(m, r, {out:"$project.logCollection_output", query:{timestamp:{$gt:new Date(new Date - 0.5*60*1000)}}});
+ if(res.counts.emit > 0){
+   memoryUsed=db.$project.logCollection_output.findOne({_id:"memoryUsed"}).value;
+   cpuUsed=db.$project.logCollection_output.findOne({_id:"cpuUsed"}).value;
+   threadCount=db.$project.logCollection_output.findOne({_id:"threadCount"}).value;
+   diskUsedRate=db.$project.logCollection_output.findOne({_id:"diskUsedRate"}).value;
+   heapMemoryUsed=db.$project.logCollection_output.findOne({_id:"heapMemoryUsed"}).value;
+   noheapMemoryUsed=db.$project.logCollection_output.findOne({_id:"noheapMemoryUsed"}).value;
+   CodeCache=db.$project.logCollection_output.findOne({_id:"CodeCache"}).value;
+   EdenSpace=db.$project.logCollection_output.findOne({_id:"EdenSpace"}).value;
+   SurvivorSpace=db.$project.logCollection_output.findOne({_id:"SurvivorSpace"}).value;
+   TenuredGen=db.$project.logCollection_output.findOne({_id:"TenuredGen"}).value;
+   PermGen=db.$project.logCollection_output.findOne({_id:"PermGen"}).value;
+
+   db.$project.metricCollection.save({name:"memoryUsed (M)",value:memoryUsed,timeStamp:now.getTime()});
+   db.$project.metricCollection.save({name:"cpuUsed",value:cpuUsed,timeStamp:now.getTime()});
+   db.$project.metricCollection.save({name:"threadCount",value:threadCount,timeStamp:now.getTime()});
+   db.$project.metricCollection.save({name:"diskUsedRate (百分比)",value:diskUsedRate,timeStamp:now.getTime()});
+   db.$project.metricCollection.save({name:"heapMemoryUsed (M)",value:heapMemoryUsed,timeStamp:now.getTime()});
+   db.$project.metricCollection.save({name:"noheapMemoryUsed (M)",value:noheapMemoryUsed,timeStamp:now.getTime()});
+   db.$project.metricCollection.save({name:"CodeCache (M)",value:CodeCache,timeStamp:now.getTime()});
+   db.$project.metricCollection.save({name:"EdenSpace (M)",value:EdenSpace,timeStamp:now.getTime()});
+   db.$project.metricCollection.save({name:"SurvivorSpace (M)",value:SurvivorSpace,timeStamp:now.getTime()});
+   db.$project.metricCollection.save({name:"TenuredGen (M)",value:TenuredGen,timeStamp:now.getTime()});
+   db.$project.metricCollection.save({name:"PermGen (M)",value:PermGen,timeStamp:now.getTime()});
+ }
+
+  return "cpuUsed="+ cpuUsed  +" memoryUsed="+memoryUsed  +" threadCount="+threadCount+" diskUsedRate="+diskUsedRate+" heapMemoryUsed="+heapMemoryUsed+" noheapMemoryUsed="+noheapMemoryUsed+" CodeCache="+CodeCache+" EdenSpace="+EdenSpace +" SurvivorSpace="+SurvivorSpace+" TenuredGen="+TenuredGen+" PermGen="+PermGen ;
+
+ ]]>  </value>
+
+        </property>
+    </bean>-->
+</beans>

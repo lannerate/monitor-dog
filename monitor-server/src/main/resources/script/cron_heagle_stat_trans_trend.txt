@@ -1,0 +1,1 @@
+10 * * * * sh /home/mongodb/local/mongodb/bin/heagle_stat_trans_trend.sh
