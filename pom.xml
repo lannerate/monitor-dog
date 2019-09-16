@@ -34,8 +34,8 @@
         <module>monitor-client</module>
         <module>monitor-server</module>
     </modules>
-    <!--<dependencies>
-         &lt;!&ndash; spring begin &ndash;&gt;
+   
+   <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
