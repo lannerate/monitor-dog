@@ -9,18 +9,6 @@
     <packaging>pom</packaging>
     <name>monitor-dog</name>
 
-
-    <!--<distributionManagement>-->
-        <!--<snapshotRepository>-->
-            <!--<id>thirdparty</id>-->
-            <!--<url>http://197.78.1.14:8081/nexus/content/repositories/thirdparty/</url>-->
-        <!--</snapshotRepository>-->
-        <!--<repository>-->
-            <!--<id>hzbank_group</id>-->
-            <!--<url>http://197.78.1.14:8081/nexus/content/repositories/hzbank_group/</url>-->
-        <!--</repository>-->
-    <!--</distributionManagement>-->
-
     <properties>
         <project.base.dir>${project.basedir}</project.base.dir>
         <project.version>1.1</project.version>
@@ -261,12 +249,11 @@
             <version>${c3p0.version}</version>
         </dependency>
 
-
-        <dependency>
-            <groupId>org.hzbank</groupId>
-            <artifactId>oracle</artifactId>
-            <version>12</version>
-        </dependency>
+     <dependency>
+       <groupId>mysql</groupId>
+       <artifactId>mysql-connector-java</artifactId>
+       <version>8.0.17</version>
+     </dependency>
 
         <dependency>
             <groupId>org.apache.velocity</groupId>
