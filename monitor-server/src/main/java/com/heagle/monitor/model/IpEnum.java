@@ -1,4 +1,4 @@
-package com.heagle.monitor.model;
+package com.monitor.model;
 
 /**
  * Created with IntelliJ IDEA.

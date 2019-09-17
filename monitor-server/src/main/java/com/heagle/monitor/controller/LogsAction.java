@@ -1,12 +1,12 @@
 
-package com.heagle.monitor.controller;
+package com.monitor.controller;
 
-import com.heagle.monitor.model.Log;
-import com.heagle.monitor.model.LogQuery;
-import com.heagle.monitor.model.Project;
-import com.heagle.monitor.service.LogsService;
-import com.heagle.monitor.service.ProjectService;
-import com.heagle.monitor.service.TaskService;
+import com.monitor.model.Log;
+import com.monitor.model.LogQuery;
+import com.monitor.model.Project;
+import com.monitor.service.LogsService;
+import com.monitor.service.ProjectService;
+import com.monitor.service.TaskService;
 import com.mongodb.DBCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -8,12 +8,12 @@
           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 <!--
 
-    <bean id="transTask" class="com.heagle.monitor.job.TransTask">
+    <bean id="transTask" class="com.monitor.job.TransTask">
         <property name="interval" value="5"/>
     </bean>
 
     <bean id="transJob" class="org.springframework.scheduling.quartz.JobDetailBean">
-        <property name="jobClass" value="com.heagle.monitor.job.TransJob"/>
+        <property name="jobClass" value="com.monitor.job.TransJob"/>
          <property name="jobDataAsMap">
              <map>
                  <entry key="transTask" value-ref="transTask" />

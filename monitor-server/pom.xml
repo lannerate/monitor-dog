@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.heagle</groupId>
+        <groupId>com.monitor</groupId>
         <artifactId>monitor-parent</artifactId>
         <version>1.1</version>
         <relativePath>../</relativePath>
@@ -33,16 +33,7 @@
         <!-- For tests -->
         <junit.version>4.11</junit.version>
     </properties>
-   <!--<distributionManagement>-->
-        <!--<snapshotRepository>-->
-            <!--<id>thirdparty</id>-->
-            <!--<url>http://197.78.1.14:8081/nexus/content/repositories/thirdparty/</url>-->
-        <!--</snapshotRepository>-->
-        <!--<repository>-->
-            <!--<id>hzbank_group</id>-->
-            <!--<url>http://197.78.1.14:8081/nexus/content/repositories/hzbank_group/</url>-->
-        <!--</repository>-->
-    <!--</distributionManagement>-->
+
     <dependencies>
         <!-- spring begin -->
         <dependency>
@@ -260,7 +251,7 @@
 
 
         <!--<dependency>-->
-            <!--<groupId>org.hzbank</groupId>-->
+            <!--<groupId>org.monitor</groupId>-->
             <!--<artifactId>oracle</artifactId>-->
             <!--<version>12</version>-->
         <!--</dependency>-->
@@ -337,7 +328,7 @@
     </dependencies>
 
     <build>
-        <finalName>heagle-monitor-server</finalName>
+        <finalName>monitor-monitor-server</finalName>
 
         <plugins>
 
@@ -377,7 +368,7 @@
                 <configuration>
                     <reload>automatic</reload>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <contextPath>heagle-monitor-server</contextPath>
+                    <contextPath>monitor-monitor-server</contextPath>
                 </configuration>
             </plugin>
 
@@ -408,15 +399,15 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.heagle.monitor.util.SpringJettyMain</mainClass>
+                            <mainClass>com.monitor.util.SpringJettyMain</mainClass>
                             <addClasspath>true</addClasspath>
-                            <packageName>heagle-monitor-server</packageName>
+                            <packageName>monitor-monitor-server</packageName>
                         </manifest>
 
                     </archive>
                     <includes>
                         <include>
-                            **/heagle/**
+                            **/monitor/**
                         </include>
                     </includes>
 

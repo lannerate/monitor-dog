@@ -1,4 +1,4 @@
-package com.heagle.monitor.common.interceptors;
+package com.monitor.common.interceptors;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

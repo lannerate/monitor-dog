@@ -1,8 +1,8 @@
 
-package com.heagle.monitor.service;
+package com.monitor.service;
 
-import com.heagle.monitor.model.Alert;
-import com.heagle.monitor.model.Project;
+import com.monitor.model.Alert;
+import com.monitor.model.Project;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -14,7 +14,7 @@
     </http>
 
     <beans:bean id="saveUserAuthenticationSuccessHandler"
-                class="com.heagle.monitor.security.ThirdAuthenticationSuccessHandler">
+                class="com.monitor.security.ThirdAuthenticationSuccessHandler">
         <beans:property name="userManager" ref="userManager"/>
     </beans:bean>
 

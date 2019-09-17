@@ -1,5 +1,5 @@
 
-package com.heagle.monitor.model;
+package com.monitor.model;
 
 import com.mongodb.CommandResult;
 import org.apache.commons.lang.StringUtils;

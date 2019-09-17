@@ -8,8 +8,8 @@
           http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
     <import resource="task-templates.xml"/>
-    <context:component-scan base-package="com.heagle.monitor.service,com.heagle.monitor.security"/>
-    <bean id="projectService" class="com.heagle.monitor.service.ProjectService" init-method="init">
+    <context:component-scan base-package="com.monitor.service,com.monitor.security"/>
+    <bean id="projectService" class="com.monitor.service.ProjectService" init-method="init">
         <property name="mongoTemplate" ref="mongoTemplate"/>
         <property name="collectionName" value="${mongo.collection}"/>
     </bean>
@@ -26,7 +26,7 @@
     </bean>
 
 
-    <bean id="taskService" class="com.heagle.monitor.service.TaskService">
+    <bean id="taskService" class="com.monitor.service.TaskService">
         <property name="executor" ref="concurrentTaskScheduler"/>
     </bean>
 
@@ -37,7 +37,7 @@
           factory-method="newScheduledThreadPool">
         <constructor-arg value="50" />
     </bean>
-    <bean id="projectCreator" class="com.heagle.monitor.util.ProjectCreator" init-method="createSelf">
+    <bean id="projectCreator" class="com.monitor.util.ProjectCreator" init-method="createSelf">
          <property name="initTasks">
               <list>
                   <!--<ref bean="logTask"/>-->
@@ -48,25 +48,25 @@
      </bean>
 
 
-    <bean id="alertService" class="com.heagle.monitor.service.AlertService" init-method="init">
+    <bean id="alertService" class="com.monitor.service.AlertService" init-method="init">
         <property name="checkSeconds" value="${alert.checkSeconds}"/>
     </bean>
     <bean id="velocityEngine" class="org.apache.velocity.app.VelocityEngine">
 
     </bean>
 
-    <bean id="userManager"  class="com.heagle.monitor.security.MongoUserManager" init-method="init">
+    <bean id="userManager"  class="com.monitor.security.MongoUserManager" init-method="init">
         <property name="mongoTemplate" ref="mongoTemplate"/>
         <property name="systemAdmins" value="${security.systemAdmins}" />
           <property name="systemAdminInitPassword" value="${security.systemAdminInitPassword}"/>
     </bean>
 
-    <bean id="httpAlertNotifier" class="com.heagle.monitor.service.HttpAlertNotifier">
+    <bean id="httpAlertNotifier" class="com.monitor.service.HttpAlertNotifier">
         <property name="level" value="ERROR"/>
     </bean>
-    <bean id="projectStatusService" class="com.heagle.monitor.service.ProjectStatusService">
+    <bean id="projectStatusService" class="com.monitor.service.ProjectStatusService">
 
     </bean>
-    <bean id="viewService" class="com.heagle.monitor.service.ViewService">
+    <bean id="viewService" class="com.monitor.service.ViewService">
     </bean>
 </beans>

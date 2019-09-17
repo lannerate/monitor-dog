@@ -1,4 +1,4 @@
-package com.heagle.monitor.util;
+package com.monitor.util;
 
 /**
  * author: hui.zhang

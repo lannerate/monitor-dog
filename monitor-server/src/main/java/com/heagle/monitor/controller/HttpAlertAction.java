@@ -1,7 +1,7 @@
-package com.heagle.monitor.controller;
+package com.monitor.controller;
 
-import com.heagle.monitor.model.Alert;
-import com.heagle.monitor.service.HttpAlertNotifier;
+import com.monitor.model.Alert;
+import com.monitor.service.HttpAlertNotifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

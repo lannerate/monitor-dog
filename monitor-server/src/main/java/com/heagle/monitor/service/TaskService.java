@@ -1,9 +1,9 @@
 
-package com.heagle.monitor.service;
+package com.monitor.service;
 
 import com.google.common.collect.Maps;
-import com.heagle.monitor.model.Project;
-import com.heagle.monitor.model.Task;
+import com.monitor.model.Project;
+import com.monitor.model.Task;
 import com.mongodb.BasicDBObject;
 import com.mongodb.CommandResult;
 import org.slf4j.Logger;

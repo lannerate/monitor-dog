@@ -1,11 +1,11 @@
 
-package com.heagle.monitor.controller;
+package com.monitor.controller;
 
-import com.heagle.monitor.model.MetricDog;
-import com.heagle.monitor.model.Project;
-import com.heagle.monitor.model.Status;
-import com.heagle.monitor.service.AlertService;
-import com.heagle.monitor.service.ProjectService;
+import com.monitor.model.MetricDog;
+import com.monitor.model.Project;
+import com.monitor.model.Status;
+import com.monitor.service.AlertService;
+import com.monitor.service.ProjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

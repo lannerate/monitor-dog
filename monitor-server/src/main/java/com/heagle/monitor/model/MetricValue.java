@@ -1,5 +1,5 @@
 
-package com.heagle.monitor.model;
+package com.monitor.model;
 
 import java.util.Date;
 

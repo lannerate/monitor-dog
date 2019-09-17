@@ -1,9 +1,9 @@
-package com.heagle.monitor.util;
+package com.monitor.util;
 
 import com.google.common.collect.Lists;
-import com.heagle.monitor.model.Project;
-import com.heagle.monitor.model.Task;
-import com.heagle.monitor.service.ProjectService;
+import com.monitor.model.Project;
+import com.monitor.model.Task;
+import com.monitor.service.ProjectService;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
@@ -21,10 +21,10 @@ public class ProjectCreator {
 
     public void createSelf() {
         Project project = new Project();
-        project.setAlias("heagle监控平台");
-        project.setName("heagle_monitor");
+        project.setAlias("monitor监控平台");
+        project.setName("monitor_monitor");
         setMongoInfoByLog4j(project);
-        logger.debug("try create a monitor project for heagle_monitor {}", project);
+        logger.debug("try create a monitor project for monitor_monitor {}", project);
         if (projectService.findProject(project.getName()) == null) {
             for (Task task : initTasks)
                 project.getTasks().add(renderTask(task, project));
@@ -38,9 +38,9 @@ public class ProjectCreator {
      * @param project
      */
     private void setMongoInfoByLog4j(Project project) {
-//        String logCollection = "heagle_monitor_log";
+//        String logCollection = "monitor_monitor_log";
         String logCollection = ResourceUtil.getMessage("collect_log");
-//        String mongoUri = "mongodb://heagledb:heagledb1234@199.78.1.32:27017/heagle_log_db";
+//        String mongoUri = "mongodb://monitordb:monitordb1234@199.78.1.32:27017/monitor_log_db";
         String mongoUri = ResourceUtil.getMessage("mongo_uri");
 
         project.setLogCollection(logCollection);

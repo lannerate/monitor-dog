@@ -11,8 +11,8 @@
     <!--<context:annotation-config/>-->
     <!-- component-scan @Component , @Controller , @Service , @Repository  -->
 
-    <context:component-scan base-package="com.heagle.monitor.base.dao,com.heagle.monitor.dao" />
-    <context:component-scan base-package="com.heagle.monitor.biz.service" />
+    <context:component-scan base-package="com.monitor.base.dao,com.monitor.dao" />
+    <context:component-scan base-package="com.monitor.biz.service" />
 
 
     <!-- 配置MapperDAO Start-->
@@ -21,7 +21,7 @@
     </bean>
 
     <bean id="jngSysTransDao" parent="baseMapper">
-        <property name="mapperInterface" value="com.heagle.com.heagle.monitor.dao.JngSysTransDao" />
+        <property name="mapperInterface" value="com.monitor.com.monitor.dao.JngSysTransDao" />
     </bean>-->
 
 

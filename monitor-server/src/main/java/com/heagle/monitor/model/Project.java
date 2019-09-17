@@ -1,9 +1,9 @@
 
-package com.heagle.monitor.model;
+package com.monitor.model;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.heagle.monitor.util.ResourceUtil;
+import com.monitor.util.ResourceUtil;
 import com.mongodb.*;
 import org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate;
 import org.apache.commons.collections.CollectionUtils;
@@ -332,7 +332,7 @@ public class Project {
      * @return
      */
     public List<TransValue> findTransData(Date date,int top) {
-        final String metricCollection ="heagle_trans";
+        final String metricCollection ="monitor_trans";
         Query query = fetchTimeQuery(date);
 //        query.sort().on(Constants.TIME_STAMP_FIELD_NAME, Order.ASCENDING);
         query.addCriteria(Criteria.where("process_code").ne("null"));
@@ -357,10 +357,10 @@ public class Project {
      * @return
      */
     public Map<String,Integer> findTopTransCnt() {
-        final String metricCollection ="heagle_trans";
+        final String metricCollection ="monitor_trans";
         /**
          * db.runCommand({
-         aggregate:"heagle_trans",
+         aggregate:"monitor_trans",
          pipeline:[
          {$group:{_id:"$process_code",total:{$sum:"$trans_flag"}}},
          {$sort:{total:-1}},
@@ -408,7 +408,7 @@ public class Project {
      * @return
      */
     public List<TransTrendValue> findTransTrendData(Date date) {
-        final String metricCollection ="heagle_trans_trend";
+        final String metricCollection ="monitor_trans_trend";
         Query query = fetchTimeQuery(date);
         query.sort().on(Constants.TIME_STAMP_FIELD_NAME, Order.ASCENDING);
         logger.debug("find metric value by {} ,mongo={}", query.getQueryObject(), mongoUri);
@@ -422,11 +422,11 @@ public class Project {
      * @return
      */
     public Map<String,Integer> findTopOnlineCnt(int minutes) {
-        final String metricCollection ="heagle_online";
+        final String metricCollection ="monitor_online";
         /**
          *
          db.runCommand({
-         aggregate:"heagle_online",
+         aggregate:"monitor_online",
          pipeline:[
          {$match:{timeStamp:{$gte:new Date(new Date() - 1*60*1000).getTime()}}},
          {$group:{_id:"$ip",topCnt:{$sum:"$online_flag"}}},

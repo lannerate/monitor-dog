@@ -1,9 +1,9 @@
 
-package com.heagle.monitor.controller;
+package com.monitor.controller;
 
-import com.heagle.monitor.model.Project;
-import com.heagle.monitor.service.ProjectService;
-import com.heagle.monitor.service.TaskService;
+import com.monitor.model.Project;
+import com.monitor.service.ProjectService;
+import com.monitor.service.TaskService;
 import com.mongodb.BasicDBObject;
 import com.mongodb.CommandResult;
 import org.slf4j.Logger;

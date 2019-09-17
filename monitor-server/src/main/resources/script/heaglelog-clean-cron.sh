@@ -1,1 +1,1 @@
-10 0 * * * sh /home/mongodb/local/mongodb/bin/heaglelog-clean.sh
+10 0 * * * sh /home/mongodb/local/mongodb/bin/monitorlog-clean.sh

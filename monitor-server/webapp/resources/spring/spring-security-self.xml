@@ -9,7 +9,7 @@
 
     <global-method-security pre-post-annotations="enabled">
         <!-- AspectJ pointcut expression that locates our "post" method and applies security that way
-        <protect-pointcut expression="execution(* bigbank.*Service.post*(..))" access="ROLE_TELLER"/>
+        <protect-pointcut expression="execution(* bigdata.*Service.post*(..))" access="ROLE_TELLER"/>
         -->
     </global-method-security>
 
@@ -37,7 +37,7 @@
 		-->
     </http>
 
-    <beans:bean id="authenticationFailureHandler" class="com.heagle.monitor.security.SelfAuthenticationFailureHandler"/>
+    <beans:bean id="authenticationFailureHandler" class="com.monitor.security.SelfAuthenticationFailureHandler"/>
 
     <authentication-manager>
 

@@ -1,4 +1,4 @@
-package com.heagle.monitor.controller;
+package com.monitor.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

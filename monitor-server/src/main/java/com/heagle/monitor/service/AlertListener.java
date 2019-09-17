@@ -1,6 +1,6 @@
-package com.heagle.monitor.service;
+package com.monitor.service;
 
-import com.heagle.monitor.model.Alert;
+import com.monitor.model.Alert;
 
 /**
  * author: hui.zhang

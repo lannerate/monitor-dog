@@ -1,9 +1,9 @@
 
 
-package com.heagle.monitor.service;
+package com.monitor.service;
 
-import com.heagle.monitor.model.LogQuery;
-import com.heagle.monitor.model.Project;
+import com.monitor.model.LogQuery;
+import com.monitor.model.Project;
 import com.mongodb.DBCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

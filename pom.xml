@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.heagle</groupId>
+    <groupId>com.monitor</groupId>
     <artifactId>monitor-parent</artifactId>
     <version>1.1</version>
     <packaging>pom</packaging>
@@ -262,7 +262,6 @@
             <artifactId>gson</artifactId>
             <version>1.6</version>
         </dependency>
-        &lt;!&ndash; velocity &ndash;&gt;
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>

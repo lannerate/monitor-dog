@@ -52,7 +52,7 @@
      
   
   <footer class="footer">
-    Copyright © 2003-2014 Heagle,All Rights Reserved
+    Copyright © 2003-2014 monitor,All Rights Reserved
   
   </footer>
 </div><!--container-->
@@ -115,12 +115,12 @@
    */
   function ajaxRequestServer(node){
        if(node=='node28'){
-           ajaxRequest('heagle_monitor/node28/jvm/metrics/');
-           ajaxRequestThread('heagle_monitor/node28/jvm/threads','线程','个');
+           ajaxRequest('monitor_monitor/node28/jvm/metrics/');
+           ajaxRequestThread('monitor_monitor/node28/jvm/threads','线程','个');
        }
       if(node=='node29'){
-          ajaxRequest('heagle_monitor/node29/jvm/metrics/');
-          ajaxRequestThread('heagle_monitor/node29/jvm/threads','线程','个');
+          ajaxRequest('monitor_monitor/node29/jvm/metrics/');
+          ajaxRequestThread('monitor_monitor/node29/jvm/threads','线程','个');
       }
   };
 

@@ -1,7 +1,7 @@
-package com.heagle.monitor.service;
+package com.monitor.service;
 
 import com.google.common.collect.Lists;
-import com.heagle.monitor.model.Alert;
+import com.monitor.model.Alert;
 
 import java.util.List;
 

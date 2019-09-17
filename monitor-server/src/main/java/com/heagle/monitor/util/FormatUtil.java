@@ -1,5 +1,5 @@
 
-package com.heagle.monitor.util;
+package com.monitor.util;
 
 import com.google.gson.Gson;
 import org.apache.commons.lang.StringUtils;

@@ -1,11 +1,11 @@
 
-package com.heagle.monitor.controller;
+package com.monitor.controller;
 
-import com.heagle.monitor.model.*;
-import com.heagle.monitor.service.ProjectService;
-import com.heagle.monitor.service.ViewService;
-import com.heagle.monitor.util.DateUtil;
-import com.heagle.monitor.util.ResourceUtil;
+import com.monitor.model.*;
+import com.monitor.service.ProjectService;
+import com.monitor.service.ViewService;
+import com.monitor.util.DateUtil;
+import com.monitor.util.ResourceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

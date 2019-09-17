@@ -1,1 +1,1 @@
-1 * * * * sh /home/mongodb/local/mongodb/bin/heagle_sync_trans.sh
+1 * * * * sh /home/mongodb/local/mongodb/bin/monitor_sync_trans.sh

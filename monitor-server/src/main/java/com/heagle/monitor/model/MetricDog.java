@@ -1,5 +1,5 @@
 
-package com.heagle.monitor.model;
+package com.monitor.model;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.MapMaker;
@@ -35,7 +35,7 @@ public class MetricDog {
     /**
      * 是否开启
      *
-     * @see com.heagle.monitor.model.MetricDog#inWorking()
+     * @see com.monitor.model.MetricDog#inWorking()
      */
     private boolean enable;
     private String metricName;

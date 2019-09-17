@@ -1,9 +1,9 @@
 
-package com.heagle.monitor.controller;
+package com.monitor.controller;
 
-import com.heagle.monitor.security.RegisterException;
-import com.heagle.monitor.security.User;
-import com.heagle.monitor.security.UserManager;
+import com.monitor.security.RegisterException;
+import com.monitor.security.User;
+import com.monitor.security.UserManager;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

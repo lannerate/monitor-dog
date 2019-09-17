@@ -17,11 +17,11 @@
 
     <aop:aspectj-autoproxy/>
     <!-- 自动扫描的包名 -->
-    <context:component-scan base-package="com.heagle.monitor"/>
+    <context:component-scan base-package="com.monitor"/>
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
         <property name="interceptors" ref="userInterceptor"/>
     </bean>
-    <bean id="userInterceptor" class="com.heagle.monitor.security.UserInterceptor"/>
+    <bean id="userInterceptor" class="com.monitor.security.UserInterceptor"/>
 
     <!-- ②：启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -104,7 +104,7 @@
         <!--<property name="allowRequestOverride" value="true"/>-->
 
     </bean>
-    <bean id="autzh" class="com.heagle.monitor.security.SimpleAuthz">
+    <bean id="autzh" class="com.monitor.security.SimpleAuthz">
         <property name="userManager" ref="userManager"/>
     </bean>
 

@@ -17,7 +17,7 @@
         </property>
     </bean>
 
-    <bean id="emailService" class="com.heagle.monitor.service.EmailService">
+    <bean id="emailService" class="com.monitor.service.EmailService">
         <property name="from" value="${email.username}"/>
         <property name="level" value="WARN"/>
     </bean>

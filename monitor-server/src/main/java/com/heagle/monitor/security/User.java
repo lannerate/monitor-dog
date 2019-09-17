@@ -1,5 +1,5 @@
 
-package com.heagle.monitor.security;
+package com.monitor.security;
 
 import com.google.common.collect.Lists;
 import org.springframework.data.annotation.Id;

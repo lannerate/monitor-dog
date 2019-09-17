@@ -20,7 +20,7 @@
     </bean>
     <bean id="webAppContext" class="org.mortbay.jetty.webapp.WebAppContext">
         <property name="contextPath" value="/${jetty.context.path}"/>
-        <property name="resourceBase" value="./HeagleMonitorServer/webapp"/>
+        <property name="resourceBase" value="./monitorMonitorServer/webapp"/>
       <!--  <property name="resourceBase" value="./webapp"/>-->
         <property name="parentLoaderPriority" value="true"/>
         <property name="descriptor" value="${jetty.descriptor}"/>

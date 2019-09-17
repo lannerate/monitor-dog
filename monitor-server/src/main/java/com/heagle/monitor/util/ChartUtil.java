@@ -1,7 +1,7 @@
-package com.heagle.monitor.util;
+package com.monitor.util;
 
 import com.google.common.collect.Lists;
-import com.heagle.monitor.model.MetricValue;
+import com.monitor.model.MetricValue;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

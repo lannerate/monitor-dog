@@ -1,4 +1,4 @@
-package com.heagle.monitor.security;
+package com.monitor.security;
 
 import org.springframework.security.core.AuthenticationException;
 

@@ -1,11 +1,11 @@
 
-package com.heagle.monitor.service;
+package com.monitor.service;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.MapMaker;
-import com.heagle.monitor.model.Alert;
-import com.heagle.monitor.model.MetricDog;
-import com.heagle.monitor.model.Project;
+import com.monitor.model.Alert;
+import com.monitor.model.MetricDog;
+import com.monitor.model.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -35,7 +35,7 @@ public class AlertService {
     ProjectService projectService;
     @Resource
     private MongoTemplate mongoTemplate;
-    private String collectionName = "heagle_monitor_alerts";
+    private String collectionName = "monitor_monitor_alerts";
     private int limitTimes = 10;
     private int limitMinutes = 60;
 

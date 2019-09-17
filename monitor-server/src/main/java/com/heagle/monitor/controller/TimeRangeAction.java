@@ -1,9 +1,9 @@
 
-package com.heagle.monitor.controller;
+package com.monitor.controller;
 
-import com.heagle.monitor.model.Project;
-import com.heagle.monitor.model.TimeRange;
-import com.heagle.monitor.service.ProjectService;
+import com.monitor.model.Project;
+import com.monitor.model.TimeRange;
+import com.monitor.service.ProjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

@@ -1,14 +1,14 @@
 
-package com.heagle.monitor.controller;
+package com.monitor.controller;
 
 import com.google.common.collect.Lists;
-import com.heagle.monitor.model.Project;
-import com.heagle.monitor.model.View;
-import com.heagle.monitor.security.SimpleAuthz;
-import com.heagle.monitor.service.AlertService;
-import com.heagle.monitor.service.ProjectService;
-import com.heagle.monitor.service.ViewService;
-import com.heagle.monitor.util.SystemConstants;
+import com.monitor.model.Project;
+import com.monitor.model.View;
+import com.monitor.security.SimpleAuthz;
+import com.monitor.service.AlertService;
+import com.monitor.service.ProjectService;
+import com.monitor.service.ViewService;
+import com.monitor.util.SystemConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
-package com.heagle.monitor.service;
+package com.monitor.service;
 
 import com.google.gson.Gson;
-import com.heagle.monitor.model.View;
+import com.monitor.model.View;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicUpdate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -17,8 +17,8 @@ public class ViewService {
     public static final String SYSTEM_CONFIG_NAME = "system_config";
     @Resource
     private MongoTemplate mongoTemplate;
-    private String collectionName = "heagle_monitor_projects";
-//    private String collectionName = "heagle_monitor_projects";
+    private String collectionName = "monitor_monitor_projects";
+//    private String collectionName = "monitor_monitor_projects";
 
     public void setMongoTemplate(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;

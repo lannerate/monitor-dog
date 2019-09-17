@@ -21,7 +21,7 @@
     <tool>
         <key>fm</key>
         <scope>application</scope>
-        <class>com.heagle.monitor.util.FormatUtil</class>
+        <class>com.monitor.util.FormatUtil</class>
     </tool>
     <tool>
         <key>link</key>

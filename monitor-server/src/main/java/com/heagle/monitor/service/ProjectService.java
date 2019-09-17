@@ -1,8 +1,8 @@
 
-package com.heagle.monitor.service;
+package com.monitor.service;
 
-import com.heagle.monitor.model.Project;
-import com.heagle.monitor.model.Task;
+import com.monitor.model.Project;
+import com.monitor.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;

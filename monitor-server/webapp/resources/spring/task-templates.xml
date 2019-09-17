@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-   <!-- <bean id="logTask" class="com.heagle.monitor.model.Task" scope="prototype">
+   <!-- <bean id="logTask" class="com.monitor.model.Task" scope="prototype">
         <property name="cron" value="40 */5 * * * *"/>
         <property name="name" value="log_stats"/>
         <property name="script" ><value>
@@ -21,7 +21,7 @@
     </bean>
     -->
 
-    <bean id="jvmTask" class="com.heagle.monitor.model.Task" scope="prototype">
+    <bean id="jvmTask" class="com.monitor.model.Task" scope="prototype">
         <property name="cron" value="1 */1 * * * *"/>
         <property name="name" value="system_stats"/>
         <property name="script" ><value>
@@ -31,7 +31,7 @@
  var ips = ['199.78.1.28','199.78.1.29'];
  for (var i = 0; i < ips.length; i++) {
       var ip = ips[i];
-      var o=db.$project.logCollection.findOne({"className":"com.hzbank.heagle.pubc.util.JvmMonitor","ip":ip,timestamp:{$gt:new Date(now - 1*60*1000)}});
+      var o=db.$project.logCollection.findOne({"className":"com.monitor.pubc.util.JvmMonitor","ip":ip,timestamp:{$gt:new Date(now - 1*60*1000)}});
 
       if(o){
 
@@ -72,7 +72,7 @@
         </property>
     </bean>
 
-  <!--  <bean id="jvmTask" class="com.heagle.monitor.model.Task" scope="prototype">
+  <!--  <bean id="jvmTask" class="com.monitor.model.Task" scope="prototype">
         <property name="cron" value="40 */1 * * * *"/>
         <property name="name" value="system_stats"/>
         <property name="script" ><value>

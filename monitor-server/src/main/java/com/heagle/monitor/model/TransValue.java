@@ -1,5 +1,5 @@
 
-package com.heagle.monitor.model;
+package com.monitor.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

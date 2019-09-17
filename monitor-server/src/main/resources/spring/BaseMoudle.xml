@@ -30,8 +30,8 @@
           destroy-method="close">
         <property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
         <property name="jdbcUrl" value="jdbc:oracle:thin:@197.78.1.11:1521:ora10" />
-        <property name="user" value="heagledb_qry" />
-        <property name="password" value="heagledb_qry" />
+        <property name="user" value="monitordb_qry" />
+        <property name="password" value="monitordb_qry" />
         &lt;!&ndash; C3P0连接池属性配置 &ndash;&gt;
         <property name="minPoolSize" value="1" />
         <property name="maxPoolSize" value="2" />
@@ -53,7 +53,7 @@
 		&lt;!&ndash; configLocation：用于指定Mybatis的配置文件位置 &ndash;&gt;
    		<property name="configLocation" value="classpath:mybatis-config.xml" />
         &lt;!&ndash; 自动扫描entity目录, 省掉Configuration.xml里的手工配置 &ndash;&gt;
-        &lt;!&ndash;<property name="mapperLocations" value="classpath:com/heagle/monitor/base/dao/" />&ndash;&gt;
+        &lt;!&ndash;<property name="mapperLocations" value="classpath:com/monitor/monitor/base/dao/" />&ndash;&gt;
 	</bean>
 
     &lt;!&ndash;
@@ -63,9 +63,9 @@
      多个基包之间可以使用逗号或者分号进行分隔
      &ndash;&gt;
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.heagle.monitor.base.dao,com.heagle.monitor.dao"/>
+        <property name="basePackage" value="com.monitor.base.dao,com.monitor.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-        <property name="annotationClass" value="com.heagle.monitor.dao.MyBatisRepository"/>
+        <property name="annotationClass" value="com.monitor.dao.MyBatisRepository"/>
     </bean>
 
     &lt;!&ndash; 配置事务管理器 &ndash;&gt;
