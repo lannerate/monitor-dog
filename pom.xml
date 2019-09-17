@@ -13,7 +13,7 @@
         <project.base.dir>${project.basedir}</project.base.dir>
         <project.version>1.1</project.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.6</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <cglib.version>2.2</cglib.version>
         <aspectj.version>1.6.9</aspectj.version>
         <jackson.version>1.9.8</jackson.version>
@@ -124,7 +124,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>1.2.1.RELEASE</version>
+            <version>1.11.22</version>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
@@ -168,7 +168,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>9.3.24.v20180605</version>
+            <version>9.4.12.v20180830</version>
         </dependency>
 
         <dependency>
