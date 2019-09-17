@@ -1,1 +1,0 @@
-2 * * * * sh /home/mongodb/local/mongodb/bin/monitor_sync_trans.sh

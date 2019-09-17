@@ -1,1 +1,0 @@
-10 * * * * sh /home/mongodb/local/mongodb/bin/monitor_stat_trans_trend.sh
