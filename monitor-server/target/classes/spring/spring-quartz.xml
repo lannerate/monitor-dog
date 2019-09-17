@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.1.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+<!--
+
+    <bean id="transTask" class="com.monitor.job.TransTask">
+        <property name="interval" value="5"/>
+    </bean>
+
+    <bean id="transJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="com.monitor.job.TransJob"/>
+         <property name="jobDataAsMap">
+             <map>
+                 <entry key="transTask" value-ref="transTask" />
+             </map>
+         </property>
+    </bean>
+
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
+        <property name="jobDetail" ref="transJob" />
+        <property name="cronExpression" value="0 0/5 * * * ?" />
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >
+        <property name="jobDetails" >
+            <list>
+                <ref bean="transJob" />
+            </list>
+        </property>
+
+        <property name="triggers" >
+            <list>
+                <ref bean="cronTrigger" />
+            </list>
+        </property>
+    </bean>
+-->
+
+</beans>

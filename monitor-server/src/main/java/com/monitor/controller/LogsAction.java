@@ -24,7 +24,7 @@ import java.text.ParseException;
 import java.util.concurrent.*;
 
 /**
- * @author hui.zhang, Steven.Zheng
+ * @author hui.zhang, Hui
  */
 @Controller
 public class LogsAction {

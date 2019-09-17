@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 通过mongURI参数配置mongdb的参数
- * @author Steven.Zheng
+ * @author Hui
  * 2012-12-31
  */
 public class AsynMongoURILayoutAppender extends BsonAppender {

@@ -7,7 +7,7 @@ import org.apache.log4j.MDC;
 import org.junit.Test;
 
 /**
- * @author Steven.Zheng
+ * @author Hui
  * @date 2013-1-18
  */
 public class AsynMongoURILayoutAppenderTest {
