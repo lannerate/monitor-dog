@@ -21,7 +21,7 @@
         <cglib.version>2.2</cglib.version>
         <aspectj.version>1.6.9</aspectj.version>
         <jackson.version>1.9.8</jackson.version>
-        <spring.version>3.2.2.RELEASE</spring.version>
+        <spring.version>3.2.5.RELEASE</spring.version>
         <spring.data.mongo.version>1.0.1.RELEASE</spring.data.mongo.version>
         <mongodb.driver.version>2.12.3</mongodb.driver.version>
         <slf4j.version>1.7.2</slf4j.version>
